@@ -1,0 +1,51 @@
+{
+  "name": "DBH-Ticket-Bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "dependencies": {
+    "@discordjs/builders": "^0.6.0",
+    "@discordjs/rest": "0.1.1-canary.0",
+    "@discordjs/voice": "^0.6.0",
+    "@keyv/sqlite": "^2.0.3",
+    "ascii-table": "^0.0.9",
+    "axios": "^0.24.0",
+    "chalk": "^4.1.2",
+    "discord-api-types": "^0.22.0",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "enmap": "^5.8.7",
+    "erela.js": "^2.3.3",
+    "erela.js-spotify": "^1.2.0",
+    "express": "^4.17.2",
+    "fs": "^0.0.1-security",
+    "keyv": "^4.0.4",
+    "mongodb": "^4.2.2",
+    "path": "^0.12.7",
+    "quickdb": "^1.0.5",
+    "something-random-on-discord": "^3.4.4",
+    "string-progressbar": "^1.0.4",
+    "timestamp-conv": "^2.2.0",
+    "unique-random-array": "^3.0.0",
+    "zoro-api": "^0.3.5"
+  },
+  "scripts": {
+    "start": "node src/bot.js",
+    "no-shard": "node src/bot.js",
+    "lint": "yarn run eslint . --ext .js,.jsx,.ts,.tsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamieGrimwood/DBH-Ticket-Bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamieGrimwood/DBH-Ticket-Bot/issues"
+  },
+  "homepage": "https://github.com/JamieGrimwood/DBH-Ticket-Bot#readme",
+  "devDependencies": {
+    "eslint": "^8.2.0"
+  }
+}

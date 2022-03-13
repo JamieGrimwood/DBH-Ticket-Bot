@@ -1,0 +1,18 @@
+{
+    "token" : "",
+    "clientID" : "",
+    "guildID" : "",
+    "defaultPrefix" : "$",
+    "db": {
+        "connectionString": ""
+    },
+    "web": {
+        "port": "4000"
+    },
+    "tickets": {
+        "archivedCategoryID": "",
+        "ticketsCategory": "",
+        "supportTeamID": "",
+        "ticketLogsChannel": ""
+    }
+}

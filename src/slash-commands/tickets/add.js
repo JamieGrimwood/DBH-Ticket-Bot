@@ -1,0 +1,68 @@
+const config = require('../../config/config.json');
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
+const ticketFunctions = require('../../command_functions/tickets');
+const { MongoClient } = require('mongodb');
+const client2 = new MongoClient(config.db.connectionString);
+const db2 = client2.db('dbh-ticket-bot');
+const collection = db2.collection('tickets');
+
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('add')
+		.setDescription('Adds a user to a ticket.')
+		.addUserOption((option) =>
+			option
+				.setName('user')
+				.setDescription('The user you want to add to the ticket.')
+				.setRequired(true),
+		),
+	async execute(interaction, client) {
+		const noPerms = new MessageEmbed()
+			.setColor('#ff0000')
+			.setDescription('**You do not have permission to do this!**')
+			.setTimestamp()
+			.setFooter('DBH Ticket Bot', 'https://cdn.discordapp.com/attachments/751155257580454041/952625324447924285/logo.png');
+
+		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
+			return interaction.reply({
+				embeds: [noPerms],
+				ephemeral: true,
+			});
+		}
+		await client2.connect();
+
+		const ticketid = interaction.channel.id;
+
+		const filteredDocs = await collection.findOne({
+			channelid: ticketid,
+		});
+
+		const noticketEmbed = new MessageEmbed()
+			.setColor('RED')
+			.setAuthor('This is not a ticket channel.')
+			.setTimestamp()
+			.setFooter('DBH Ticket Bot', 'https://cdn.discordapp.com/attachments/751155257580454041/952625324447924285/logo.png');
+
+		if (!filteredDocs) {return interaction.reply({ embeds: [noticketEmbed], ephemeral: true });}
+
+		const user = interaction.options.getMember('user');
+		interaction.channel.permissionOverwrites.edit(
+			user.id,
+			{
+				ATTACH_FILES: true,
+				READ_MESSAGE_HISTORY: true,
+				SEND_MESSAGES: true,
+				VIEW_CHANNEL: true,
+			},
+			`Archiving ticket channel. (${interaction.user.id})`,
+		);
+		const ticketEmbed = new MessageEmbed()
+			.setColor('#0099ff')
+			.setDescription(`<@${user.id}> has been added to the ticket.`)
+		// .setThumbnail('https://i.imgur.com/AfFp7pu.png')
+			.setTimestamp()
+			.setFooter('DBH Ticket Bot', 'https://cdn.discordapp.com/attachments/751155257580454041/952625324447924285/logo.png');
+		await interaction.reply({ embeds: [ticketEmbed] });
+	},
+};
