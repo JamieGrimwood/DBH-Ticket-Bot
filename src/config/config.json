@@ -13,6 +13,7 @@
         "archivedCategoryID": "",
         "ticketsCategory": "",
         "supportTeamID": "",
-        "ticketLogsChannel": ""
+        "ticketLogsChannel": "",
+        "transcriptURL": ""
     }
 }

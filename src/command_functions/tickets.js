@@ -166,7 +166,7 @@ exports.close = async (interaction) => {
 			.addField('Closed At', Date())
 			.addField(
 				'Direct Transcript',
-				`https://${config.transcriptURL}/tickets/${name}.html`,
+				`https://${config.tickets.transcriptURL}/tickets/${name}.html`,
 			)
 			.setTimestamp()
 			.setFooter('DBH Ticket Bot', 'https://cdn.discordapp.com/attachments/751155257580454041/952625324447924285/logo.png');
